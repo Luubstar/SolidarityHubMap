@@ -15,6 +15,9 @@ import software.xdev.vaadin.maps.leaflet.registry.LDefaultComponentManagementReg
 @SuppressWarnings("checkstyle:MagicNumber")
 public class Demo extends VerticalLayout {
 
+    private Double userLatitude;
+    private Double userLongitude;
+
     public static final String NAV = "leaflet-vaadin-geojson";
 
     public Demo() {
@@ -40,19 +43,13 @@ public class Demo extends VerticalLayout {
         map.setView(new LLatLng(reg, 39.75621, -104.99404), 17);
 
         // Add a method to get the user's current location and update the map
-        getCurrentLocationAndUpdateMap(map, reg);
+        double userLatitude, userLongitude;
+
     }
 
-    private void getCurrentLocationAndUpdateMap(LMap map, LComponentManagementRegistry reg) {
-        // Using JavaScript to access the geolocation API of the browser
+    private Demo getCoordinates() {
         getElement().executeJs("navigator.geolocation.getCurrentPosition(function(position) {"
-                + "var latitude = position.coords.latitude;"
-                + "var longitude = position.coords.longitude;"
-                + "console.log('User position: ', latitude, longitude);"
-                + "var latLng = new L.LatLng(latitude, longitude);"
-                + "window.vaadin.updateLocation(latLng.lat, latLng.lng);"
-                + "}, function(error) {"
-                + "console.error('Error getting geolocation', error);"
+                + "    window.vaadin.updateLocation(position.coords.latitude, position.coords.longitude);"
                 + "});");
 
         // Listen for JavaScript callback and update the map view
@@ -63,7 +60,14 @@ public class Demo extends VerticalLayout {
                         + "    map.setView(latLng, 17);"
                         + "    L.marker(latLng).addTo(map);"
                         + "}};"));
+        return new Demo(userLatitude, userLongitude);
+    }
+
+    public Demo(Double userLatitude, Double userLongitude) {
+        this.userLatitude = userLatitude;
+        this.userLongitude = userLongitude;
     }
 
 
 }
+
