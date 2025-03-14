@@ -6,13 +6,9 @@ import es.pingu.map.mapController.elements.ZonaAfectada;
 
 public class MapElementFactory {
     public static MapElement crearElemento(ElementTypes type, double lat, double lon, String description) {
-        switch (type) {
-            case AFECTADA:
-                return new ZonaAfectada(lat, lon, description);
-            case REFUGIO:
-                return new Refugio(lat, lon, description);
-            default:
-                throw new IllegalArgumentException("Tipo de elemento no reconocido");
-        }
+        return switch (type) {
+            case AFECTADA -> ZonaAfectada.createNewElement(lat, lon, description);
+            case REFUGIO -> Refugio.createNewElement(lat, lon, description);
+        };
     }
 }

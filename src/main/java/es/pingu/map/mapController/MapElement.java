@@ -1,5 +1,8 @@
 package es.pingu.map.mapController;
 
+import lombok.ToString;
+
+@ToString
 public abstract class MapElement {
     protected double lat;
     protected double lon;
