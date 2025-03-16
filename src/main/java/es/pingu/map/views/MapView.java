@@ -29,7 +29,6 @@ public class MapView extends HorizontalLayout {
         map.addLayer(LTileLayer.createDefaultForOpenStreetMapTileServer(reg));
 
         map.setView(new LLatLng(reg, 39.75621, -104.99404), 17);
-
         map.on(
                 "click",
                 "e => alert('Failed to locate: ' "
