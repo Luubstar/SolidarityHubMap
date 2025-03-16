@@ -8,7 +8,7 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 
 @SpringBootApplication
 @EnableVaadin
-public class MapApplication extends SpringBootServletInitializer implements AppShellConfigurator {
+public class MapApplication implements AppShellConfigurator {
 
 	public static void main(String[] args) {
 		SpringApplication.run(MapApplication.class, args);
