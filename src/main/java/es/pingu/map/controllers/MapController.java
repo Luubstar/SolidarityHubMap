@@ -2,7 +2,6 @@ package es.pingu.map.controllers;
 
 import jakarta.validation.constraints.NotNull;
 import lombok.NonNull;
-import lombok.Setter;
 import software.xdev.vaadin.maps.leaflet.basictypes.LLatLng;
 import software.xdev.vaadin.maps.leaflet.layer.raster.LTileLayer;
 import software.xdev.vaadin.maps.leaflet.map.LMap;
@@ -31,16 +30,16 @@ public class MapController {
     }
 
     public void createTask(){
-        creatingZone = false;
-        creatingTask = true;
+        this.creatingZone = false;
+        this.creatingTask = true;
         // TODO: ¿Modificar el mapa? realmente no tengo ni idea
+        // TODO: ¿Cambiar cursor?
     }
 
     public void createZone(){
-        creatingTask = false;
-        creatingZone = true;
-
-
+        this.creatingTask = false;
+        this.creatingZone = true;
         // TODO: ¿Modificar el mapa? realmente no tengo ni idea
+        // TODO: ¿Cambiar cursor?
     }
 }

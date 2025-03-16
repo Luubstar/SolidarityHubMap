@@ -8,8 +8,6 @@ import com.vaadin.flow.router.Route;
 import es.pingu.map.commons.NavigationBar;
 import es.pingu.map.controllers.MapController;
 import software.xdev.vaadin.maps.leaflet.MapContainer;
-import software.xdev.vaadin.maps.leaflet.basictypes.LLatLng;
-import software.xdev.vaadin.maps.leaflet.layer.raster.LTileLayer;
 import software.xdev.vaadin.maps.leaflet.map.LMap;
 import software.xdev.vaadin.maps.leaflet.registry.LComponentManagementRegistry;
 import software.xdev.vaadin.maps.leaflet.registry.LDefaultComponentManagementRegistry;
@@ -43,7 +41,7 @@ public class MapView extends HorizontalLayout {
 
         controller = new MapController(reg, map, 39.47, -0.42);
 
-        tarea.addClickListener(e -> {controller.createTask();});
-        zona.addClickListener(e -> {controller.createZone();});
+        tarea.addClickListener(e -> controller.createTask());
+        zona.addClickListener(e -> controller.createZone());
     }
 }
