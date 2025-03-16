@@ -1,9 +1,12 @@
 package es.pingu.map.views;
 
+import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
+import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import es.pingu.map.commons.NavigationBar;
+import es.pingu.map.controllers.MapController;
 import software.xdev.vaadin.maps.leaflet.MapContainer;
 import software.xdev.vaadin.maps.leaflet.basictypes.LLatLng;
 import software.xdev.vaadin.maps.leaflet.layer.raster.LTileLayer;
@@ -15,22 +18,27 @@ import software.xdev.vaadin.maps.leaflet.registry.LDefaultComponentManagementReg
 @PageTitle("Visor del mapa")
 public class MapView extends HorizontalLayout {
 
+    MapController controller;
+
     public MapView() {
         this.setSizeFull();
         this.add(NavigationBar.createNavBar());
 
+        VerticalLayout MapVerticalLayout = new VerticalLayout();
+        HorizontalLayout ButtonLayout = new HorizontalLayout();
+
+        this.add(MapVerticalLayout);
+
         final LComponentManagementRegistry reg = new LDefaultComponentManagementRegistry(this);
         final MapContainer mapContainer = new MapContainer(reg);
-            mapContainer.setSizeFull();
-            this.add(mapContainer);
-
+        mapContainer.setSizeFull();
         final LMap map = mapContainer.getlMap();
-        map.addLayer(LTileLayer.createDefaultForOpenStreetMapTileServer(reg));
 
-        map.setView(new LLatLng(reg, 39.75621, -104.99404), 17);
-        map.on(
-                "click",
-                "e => alert('Failed to locate: ' "
-                        + ")");
+        MapVerticalLayout.add(mapContainer);
+        MapVerticalLayout.add(ButtonLayout);
+
+        ButtonLayout.add(new Button("Tarea"), new Button("Zona"));
+
+        controller = new MapController(reg, map, 39.47, -0.42);
     }
 }
