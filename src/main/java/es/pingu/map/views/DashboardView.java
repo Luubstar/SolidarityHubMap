@@ -8,6 +8,7 @@ import es.pingu.map.commons.NavigationBar;
 public class DashboardView extends VerticalLayout {
 
     public DashboardView() {
+        this.setSizeFull();
         this.add(NavigationBar.createNavBar());
     }
 }

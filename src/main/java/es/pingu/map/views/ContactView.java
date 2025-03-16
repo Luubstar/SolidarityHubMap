@@ -8,6 +8,7 @@ import es.pingu.map.commons.NavigationBar;
 public class ContactView extends VerticalLayout {
 
     public ContactView() {
+        this.setSizeFull();
         this.add(NavigationBar.createNavBar());
     }
 }

@@ -37,8 +37,13 @@ public class MapView extends HorizontalLayout {
         MapVerticalLayout.add(mapContainer);
         MapVerticalLayout.add(ButtonLayout);
 
-        ButtonLayout.add(new Button("Tarea"), new Button("Zona"));
+        Button tarea = new Button("Tarea");
+        Button zona = new Button("Zona");
+        ButtonLayout.add(tarea, zona);
 
         controller = new MapController(reg, map, 39.47, -0.42);
+
+        tarea.addClickListener(e -> {controller.createTask();});
+        zona.addClickListener(e -> {controller.createZone();});
     }
 }

@@ -7,6 +7,7 @@ import es.pingu.map.commons.NavigationBar;
 @Route("")
 public class MainView extends VerticalLayout {
     public MainView() {
+        this.setSizeFull();
         this.add(NavigationBar.createNavBar());
     }
 }
