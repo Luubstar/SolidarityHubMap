@@ -1,6 +1,13 @@
 package es.pingu.map.views;
 
+import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
+import es.pingu.map.commons.NavigationBar;
 
-public class DashboardView {
+@Route("dashboard")
+public class DashboardView extends VerticalLayout {
+
+    public DashboardView() {
+        this.add(NavigationBar.createNavBar());
+    }
 }

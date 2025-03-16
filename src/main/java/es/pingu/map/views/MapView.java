@@ -17,7 +17,6 @@ public class MapView extends HorizontalLayout {
 
     public MapView() {
         this.setSizeFull();
-
         this.add(NavigationBar.createNavBar());
 
         final LComponentManagementRegistry reg = new LDefaultComponentManagementRegistry(this);

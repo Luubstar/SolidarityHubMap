@@ -1,6 +1,13 @@
 package es.pingu.map.views;
 
+import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
+import es.pingu.map.commons.NavigationBar;
 
-public class ContactView {
+@Route("contact")
+public class ContactView extends VerticalLayout {
+
+    public ContactView() {
+        this.add(NavigationBar.createNavBar());
+    }
 }
