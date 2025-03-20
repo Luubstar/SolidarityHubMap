@@ -1,26 +1,28 @@
 package es.pingu.map.controllers;
 
-import com.vaadin.flow.component.ClientCallable;
 import com.vaadin.flow.component.UI;
-import elemental.json.JsonObject;
-import elemental.json.JsonValue;
-import es.pingu.map.views.MapView;
 import jakarta.validation.constraints.NotNull;
+import lombok.Getter;
 import lombok.NonNull;
+import lombok.Setter;
 import software.xdev.vaadin.maps.leaflet.basictypes.LLatLng;
-import software.xdev.vaadin.maps.leaflet.layer.raster.LTileLayer;
 import software.xdev.vaadin.maps.leaflet.layer.ui.LMarker;
+import software.xdev.vaadin.maps.leaflet.layer.vector.LPolygon;
 import software.xdev.vaadin.maps.leaflet.map.LMap;
-import software.xdev.vaadin.maps.leaflet.map.LMapLocateOptions;
 import software.xdev.vaadin.maps.leaflet.registry.LComponentManagementRegistry;
 
 import java.util.ArrayList;
 
 public class MapController {
-    private LComponentManagementRegistry reg;
-    private LMap map;
+    private final LComponentManagementRegistry reg;
+    private final LMap map;
     private LLatLng coords;
-    private ArrayList<LLatLng> points;
+    private final ArrayList<LLatLng> points = new ArrayList<>();
+
+    @Setter
+    @Getter
+    private boolean zone = false;
+
 
 
 
@@ -43,11 +45,21 @@ public class MapController {
     public void createZone(){
         // TODO: ¿Modificar el mapa? realmente no tengo ni idea
         // TODO: ¿Cambiar cursor?
+        new LPolygon(reg, points.toArray(new LLatLng[0])).addTo(map);
+        points.clear();
     }
 
     public void setCoords(double lat, double lng) {
         this.coords = new LLatLng(reg, lat, lng);
     }
 
+    public void addPoint(double lat, double lng){
+        points.add(new LLatLng(reg, lat, lng));
+    }
+
+    public int getNumPoints(){
+        return points.size();
+    }
+    
 
 }
