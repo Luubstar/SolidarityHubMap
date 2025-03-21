@@ -1,6 +1,5 @@
 package es.pingu.map.controllers;
 
-import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 
