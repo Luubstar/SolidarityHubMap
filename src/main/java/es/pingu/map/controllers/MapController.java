@@ -23,9 +23,6 @@ public class MapController {
     @Getter
     private boolean zone = false;
 
-
-
-
     public MapController(@NotNull LComponentManagementRegistry reg, @NonNull LMap map) {
         this.reg = reg;
         this.map = map;

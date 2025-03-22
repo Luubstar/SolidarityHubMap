@@ -16,6 +16,10 @@ import software.xdev.vaadin.maps.leaflet.MapContainer;
 import software.xdev.vaadin.maps.leaflet.layer.raster.LTileLayer;
 import software.xdev.vaadin.maps.leaflet.map.LMap;
 import software.xdev.vaadin.maps.leaflet.map.LMapLocateOptions;
+import es.pingu.map.commons.NavigationBar;
+import es.pingu.map.controllers.MapController;
+import software.xdev.vaadin.maps.leaflet.MapContainer;
+import software.xdev.vaadin.maps.leaflet.map.LMap;
 import software.xdev.vaadin.maps.leaflet.registry.LComponentManagementRegistry;
 import software.xdev.vaadin.maps.leaflet.registry.LDefaultComponentManagementRegistry;
 
@@ -30,8 +34,6 @@ public class MapView extends HorizontalLayout {
     private UI ui;
     private final Button tarea = new Button("Tarea");
     private final Button zona = new Button("Zona");
-
-
 
     public MapView() {
         this.setId(ID);
@@ -50,11 +52,8 @@ public class MapView extends HorizontalLayout {
         this.map.addLayer(LTileLayer.createDefaultForOpenStreetMapTileServer(reg));
         this.map.locate(new LMapLocateOptions().withSetView(true));
 
-
-
         MapVerticalLayout.add(mapContainer);
         MapVerticalLayout.add(ButtonLayout);
-
         tarea.isDisableOnClick();
         ButtonLayout.add(tarea, zona);
 
@@ -139,10 +138,4 @@ public class MapView extends HorizontalLayout {
         }
 
     }
-
-
-
-
-
-
 }

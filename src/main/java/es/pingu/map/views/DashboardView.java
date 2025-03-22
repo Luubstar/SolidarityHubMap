@@ -4,13 +4,17 @@ import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
+import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.router.Route;
+import es.pingu.map.commons.NavigationBar;
+
 import es.pingu.map.commons.NavigationBar;
 import es.pingu.map.controllers.DashboardController;
 
 @Route("dashboard")
 public class DashboardView extends VerticalLayout {
     DashboardController controller;
-
+  
     public DashboardView() {
         this.setSizeFull();
         this.add(NavigationBar.createNavBar());
@@ -35,9 +39,5 @@ public class DashboardView extends VerticalLayout {
         userButton.addClickListener(e -> controller.showUsers(this));
         reportButton.addClickListener(e-> controller.showReports(this));
         settingsButton.addClickListener(e-> controller.showSettings(this));
-
-
-
-        
     }
 }
