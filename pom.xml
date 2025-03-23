@@ -50,6 +50,10 @@
 			<scope>runtime</scope>
 		</dependency>
 		<dependency>
+			<groupId>com.vaadin</groupId>
+			<artifactId>vaadin-charts</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>software.xdev</groupId>
 			<artifactId>vaadin-maps-leaflet-flow</artifactId>
 			<version>4.2.0</version>
