@@ -1,9 +1,9 @@
 package org.pinguweb.backend.controller;
 
-import org.pinguweb.DTO.NeedDTO;
+import org.pinguweb.DTO.VolunteerDTO;
 import org.pinguweb.backend.DTO.BackendDTOFactory;
 import org.pinguweb.backend.controller.common.ServerException;
-import org.pinguweb.backend.repository.NeedRepository;
+import org.pinguweb.backend.repository.VolunteerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.Async;
@@ -15,30 +15,28 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api")
-public class NeedController {
-
+public class VolunteerController {
     @Autowired
-    NeedRepository repository;
+    VolunteerRepository repository;
 
     @Async
-    @GetMapping("/need")
-    public CompletableFuture<ResponseEntity<List<NeedDTO>>> getAll(){
+    @GetMapping("/volunteer")
+    public CompletableFuture<ResponseEntity<List<VolunteerDTO>>> getAll(){
         if (ServerException.isServerClosed(repository)){return CompletableFuture.completedFuture(ResponseEntity.internalServerError().build());}
         BackendDTOFactory factory = new BackendDTOFactory();
 
-        List<NeedDTO> needs = repository.findAll().stream().map(factory::createNeedDTO).collect(Collectors.toList());
-
-        return CompletableFuture.completedFuture(ResponseEntity.ok(needs));
+        List<VolunteerDTO> volunteers = repository.findAll().stream().map(factory::createVolunteerDTO).collect(Collectors.toList());
+        return CompletableFuture.completedFuture(ResponseEntity.ok(volunteers));
     }
 
     @Async
-    @GetMapping("/need/{id}")
-    public CompletableFuture<ResponseEntity<NeedDTO>> getNeed(@PathVariable Integer id) {
+    @GetMapping("/volunteer/{id}")
+    public CompletableFuture<ResponseEntity<VolunteerDTO>> getVolunteer(@PathVariable String id) {
         if (ServerException.isServerClosed(repository)){return CompletableFuture.completedFuture(ResponseEntity.internalServerError().build());}
 
         BackendDTOFactory factory = new BackendDTOFactory();
         if (repository.existsById(id)) {
-            return CompletableFuture.completedFuture(ResponseEntity.ok(factory.createNeedDTO(repository.getReferenceById(id))));
+            return CompletableFuture.completedFuture(ResponseEntity.ok(factory.createVolunteerDTO(repository.getReferenceById(id))));
         }
         else {
             return CompletableFuture.completedFuture(ResponseEntity.notFound().build());
@@ -46,18 +44,18 @@ public class NeedController {
     }
 
     @Async
-    @PostMapping("/need")
-    public CompletableFuture<ResponseEntity<NeedDTO>> addNeed(@RequestBody NeedDTO need) {
+    @PostMapping("/volunteer")
+    public CompletableFuture<ResponseEntity<VolunteerDTO>> addVolunteer(@RequestBody VolunteerDTO volunteer) {
         if (ServerException.isServerClosed(repository)){return CompletableFuture.completedFuture(ResponseEntity.internalServerError().build());}
 
         // TODO: Esto aun no funciona
-        //return ResponseEntity.ok(repository.save(Need.fromDTO(need)).toDTO());
+        //return ResponseEntity.ok(repository.save(Volunteer.fromDTO(volunteer)).toDTO());
         return CompletableFuture.completedFuture(ResponseEntity.notFound().build());
     }
 
     @Async
-    @DeleteMapping("/need/{id}")
-    public CompletableFuture<ResponseEntity<Void>> deleteNeed(@PathVariable int id) {
+    @DeleteMapping("/volunteer/{id}")
+    public CompletableFuture<ResponseEntity<Void>> deleteVolunteer(@PathVariable String id) {
         if (ServerException.isServerClosed(repository)){return CompletableFuture.completedFuture(ResponseEntity.internalServerError().build());}
 
         if (repository.existsById(id)) {
@@ -70,13 +68,12 @@ public class NeedController {
     }
 
     @Async
-    @PutMapping("/need")
-    public CompletableFuture<ResponseEntity<NeedDTO>> updateNeed(@RequestBody NeedDTO need) {
+    @PutMapping("/volunteer")
+    public CompletableFuture<ResponseEntity<VolunteerDTO>> updateVolunteer(@RequestBody VolunteerDTO volunteer) {
         if (ServerException.isServerClosed(repository)){return CompletableFuture.completedFuture(ResponseEntity.internalServerError().build());}
 
-        //TODO: Esto no funciona
-        if (repository.existsById(need.getId())) {
-            //return ResponseEntity.ok(repository.save(Need.fromDTO(need)).toDTO());
+        if (repository.existsById(volunteer.getDni())) {
+            //return ResponseEntity.ok(repository.save(Volunteer.fromDTO(volunteer)).toDTO());
             return CompletableFuture.completedFuture(ResponseEntity.notFound().build());
         }
         else {
