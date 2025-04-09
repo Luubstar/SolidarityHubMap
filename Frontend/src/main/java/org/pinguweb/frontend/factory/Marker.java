@@ -23,13 +23,13 @@ public class Marker extends MapObject{
     LMarker markerObj;
     Integer ID;
 
-    public Marker(LComponentManagementRegistry reg, Double latitude, Double longitude){
+    protected Marker(LComponentManagementRegistry reg, Double latitude, Double longitude){
         this.setLatitude(latitude);
         this.setLongitude(longitude);
         this.markerObj = new LMarker(reg, new LLatLng(reg, latitude, longitude));
     }
 
-    public Marker convertToZoneMarker(LComponentManagementRegistry reg){
+    protected Marker convertToZoneMarker(LComponentManagementRegistry reg){
         LIcon icon = new LIcon(reg, new LIconOptions()
                 .withIconUrl("https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png")
                 .withShadowUrl("https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png")

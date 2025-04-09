@@ -81,33 +81,11 @@ public class MapService {
     }
 
 
-    @Async
-    public void load() {
-        BackendObject<List<NeedDTO>> needs = BackendService.getListFromBackend(BackendService.BACKEND + "/api/need",
-                new ParameterizedTypeReference<>() {});
-
-        if (needs.getStatusCode() == HttpStatus.OK) {
-            for (NeedDTO need : needs.getData()) {
-                createNeed(need);
-            }
-        }
-
-        BackendObject<List<ZoneDTO>> zonas = BackendService.getListFromBackend(BackendService.BACKEND + "/api/zone",
-                new ParameterizedTypeReference<>() {});
-
-        if (zonas.getStatusCode() == HttpStatus.OK) {
-            for (ZoneDTO zone : zonas.getData()) {
-                createZone(zone);
-            }
-        }
-    }
-
     // TODO: Texto para el el marcador de tarea
     public Marker createNeed(NeedDTO needDTO) {
         double lat = needDTO.getLatitude();
         double lng = needDTO.getLongitude();
-        Marker marker = (Marker) markerFactory.createMapObject(reg, lat, lng);
-        marker = marker.convertToZoneMarker(reg);
+        Marker marker = (Marker) markerFactory.createZoneMapObject(reg, lat, lng);
         marker.setID(needDTO.getId());
         marker.addToMap(this.map);
         marker.getMarkerObj().on("click", "e => document.getElementById('" + ID + "').$server.clickOnNeed(e.latlng, " + marker.getID() + ")");
@@ -139,8 +117,7 @@ public class MapService {
     }
 
     public Marker createZoneMarker(double lat, double lng) {
-        Marker marker = (Marker) markerFactory.createMapObject(reg, lat, lng);
-        marker = marker.convertToZoneMarker(reg);
+        Marker marker = (Marker) markerFactory.createZoneMapObject(reg, lat, lng);
 
         marker.getMarkerObj().on("dragstart", "e => document.getElementById('" + ID + "').$server.zoneMarkerStart(e.target.getLatLng())");
         marker.getMarkerObj().on("dragend", "e => document.getElementById('" + ID + "').$server.zoneMarkerEnd(e.target.getLatLng())");
